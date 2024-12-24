@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.859c25eb.css",
+    "main.js": "/static/js/main.cf7ba907.js",
+    "static/js/453.4e6a5264.chunk.js": "/static/js/453.4e6a5264.chunk.js",
+    "static/media/blankerrounded1.svg": "/static/media/blankerrounded1.68d6adf900179ae857088c7779e73a5d.svg",
+    "static/media/letter-w-svgrepo-com.svg": "/static/media/letter-w-svgrepo-com.b4e423d91f559c59195e2e29d7d2bfe8.svg",
+    "static/media/reshot-icon-sand-timer-SVQDFT6A9J.svg": "/static/media/reshot-icon-sand-timer-SVQDFT6A9J.384f7b274a7cad4d77b400b9c6cd0dce.svg",
+    "static/media/replace-svgrepo-com.svg": "/static/media/replace-svgrepo-com.c0c258e6d02e6c206ab1ce69da03a23c.svg",
+    "index.html": "/index.html",
+    "main.859c25eb.css.map": "/static/css/main.859c25eb.css.map",
+    "main.cf7ba907.js.map": "/static/js/main.cf7ba907.js.map",
+    "453.4e6a5264.chunk.js.map": "/static/js/453.4e6a5264.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.859c25eb.css",
+    "static/js/main.cf7ba907.js"
+  ]
+}

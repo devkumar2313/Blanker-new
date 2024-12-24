@@ -1,0 +1,25 @@
+{
+  "short_name": "Blanker",
+  "name": "Blanker Overview",
+  "icons": [
+    {
+      "src": "Blanker.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "https://st.depositphotos.com/1034895/2167/i/600/depositphotos_21671527-stock-photo-password.jpg",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://ideas.hallmark.com/wp-content/uploads/2020/08/WTW_ThankYouCards.jpg",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone stay hungry and stay motivated",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

@@ -1,0 +1,41 @@
+
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
+
+@layer components{
+  .section-min-height{
+      min-height: calc(100vh -68px)
+  }
+
+  .toggle-btn{
+      @apply [&>div::before]:translate-y-0 [&>div::before]:rotate-45 [&>div::after]:translate-y-0 [&>div::after]:-rotate-45 [&>div]:bg-transparent [&>div]:rotate-[720deg]
+  }
+  .text-yellow-light {
+    --tw-text-opacity: 1;
+    color: rgb(93 63 211 / var(--tw-text-opacity));
+}
+.leading-\[80px\] {
+    line-height: 80px;
+}
+.text-8xl {
+    font-size: 6rem;
+    line-height: 1;
+}
+.font-hero {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.text-center {
+    text-align: center;
+}
+.text-shadow {
+    text-shadow: 0 5px 40px rgba(0, 0, 0, .4);
+}
+
+}
+
+
+
+
