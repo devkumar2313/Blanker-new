@@ -172,42 +172,58 @@ export class Home extends Component {
           if (e.key === 'Enter') {
             if (this.state.focusedInput === 2) {
               e.preventDefault(); // Prevent form submission if second input is focused
-              handleButton1(); // Trigger the submit logic for the second input
+              if(this.state.buttonText2 == '✔' || this.state.buttonText == '✔'){
+                this.setState({buttonText3:'Next'})
+
+            }
+              handleButton1();
+               // Trigger the submit logic for the second input
             }
           }
         };
        
         const handleButton1 = () => {
-            this.setState({error2:""})
+            if(this.state.inputValue != ''){
+                if(this.state.buttonText2 == '✔' || this.state.buttonText == '✔'){
+                    this.setState({buttonText3:'Next'})
+    
+                }
+                this.setState({error2:""})
            
-            this.setState({loading2:true,buttonText2:"Processing.."});
-            
-            // Simulate a process with a timeout
-            setTimeout(() => {
-                this.setState({loading2:false,buttonText2:'✔'});
-
-            }, 1000); // Change 3000 to the desired time in milliseconds
-            if(this.state.buttonText == '✔'){
-                this.setState({buttonText3:'Next'})
-
+                this.setState({loading2:true,buttonText2:"Processing.."});
+               
+                
+                // Simulate a process with a timeout
+                setTimeout(() => {
+                    this.setState({loading2:false,buttonText2:'✔'});
+    
+                }, 500); // Change 3000 to the desired time in milliseconds
+                
             }
+           
         }
        
        
             const hello = () => {
-                this.setState({error3:""})
+                if(this.state.inputValue2 != ''){
+                    if(this.state.buttonText2 == '✔' || this.state.buttonText == '✔'){
+                        this.setState({buttonText3:'Next'})
+    
+                    }
+                    this.setState({error3:""})
                 
                 this.setState({loading:true,buttonText:"Processing.."});
+                
                 
                 // Simulate a process with a timeout
                 setTimeout(() => {
                     this.setState({loading:false,buttonText:'✔'});
   
-                }, 1000); // Change 3000 to the desired time in milliseconds
-                if(this.state.buttonText2 == '✔'){
-                    this.setState({buttonText3:'Next'})
-
+                }, 500); // Change 3000 to the desired time in milliseconds
+               
+                    
                 }
+                
             }
        
             const handleChange=(e)=>{
@@ -319,8 +335,7 @@ export class Home extends Component {
       )}
        
     </div>                     
-    <button class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' onClick={handleClick3
-                                }>{this.state.buttonText3}<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+    <button class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' onClick={handleClick3}>{this.state.buttonText3}<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                                 </svg></button>       
 
@@ -526,39 +541,43 @@ export class Home extends Component {
                     if(this.state.LevelEnhancer){
                         return (
                             <> 
+                            
                              <div className='absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]'>
-                            <div class="flex items-start justify-left -mb-10  gap-2 count-down-main">
-                             <div class="timer w-16">
+                             <div class="flex items-start justify-left -mb-10  gap-2 count-down-main">
+                             <div class="timer w-10 md:w-16">
     <div
-    class=" bg-indigo-600 py:1 px:1 md:py-2 md:px-1 lg:py-3 lg:px-2 rounded-lg overflow-hidden">
+    class=" bg-indigo-600 py:0.5xl px:1 md:py-2 md:px-1 lg:py-3 lg:px-2 rounded-lg overflow-hidden">
     <h3
       class="font-Cormorant font-semibold text:0.5xl md:text-1xl text-white text-center">{this.state.time.m}
     </h3>
     </div>
-    <p class="font-Cormorant font-normal text-myColor mt-1 text-center text-1xl md:text-1.2xl lg:text-1.5xl w-full ">minutes</p>
+    <p class="font-Cormorant font-normal text-myColor mt-1 text-center text-xs md:text-xl lg:text-1.5xl w-full ">minutes</p>
     </div>
-    <h3 class="font-manrope font-semibold text:1xl md:text-2xl lg:text-3xl text-myColor">:</h3>
+    <h3 class="font-manrope font-semibold text:0.5xl md:text-2xl lg:text-3xl text-myColor">:</h3>
     <div class="timer w-16">
     <div
-    class=" bg-indigo-600 py:1 px:1 md:py-2 md:px-1 lg:py-3 lg:px-2 rounded-lg overflow-hidden ">
+    class=" bg-indigo-600 py:0.5 px:1 md:py-2 md:px-1 lg:py-3 lg:px-2 rounded-lg overflow-hidden ">
     <h3
       class="font-Cormorant font-semibold text-1xl text-white text-center animate-countinsecond">{this.state.time.s}
     </h3>
     </div>
-    <p class="text-1xl md:text-1.2xl lg:text-1.5xl font-Cormorant font-normal text-myColor mt-1 text-center w-full">seconds</p>
+    <p class="text-xs md:text-xl lg:text-1.5xl font-Cormorant font-normal text-myColor mt-1 text-center w-full ">seconds</p>
     </div>
     </div>
                              <header class='top-0 z-10'>
                              {/* <h2 className='text-white'>Time Limit: s:{this.state.time.m} s:{this.state.time.s}</h2>  */}
                         
     
-                                <section className='max-w-xl mx-auto p-4 flex justify-between items-center'>
+                             <section className='max-w-4xl mx-auto p-4 flex flex-col sm:flex-row sm:justify-between'>
                                
                                
+                               <div className='max-w-3xl mx-auto'>
+                               <h2 className="hidden sm:block font-hero text-yellow-light text-shadow text-6xl   leading-[80px] md:leading-[80px] text-center md:text-left  border-4 border-double border-indigo-600 bg-indigo-100 ">Game:</h2> 
+                               <h2 className="sm:hidden mt-8 font-hero  text-yellow-light text-shadow text-4xl   leading-[40px] md:leading-[80px] text-center md:text-left  border-4 border-double border-indigo-600 bg-indigo-100 ">Game:</h2> 
+
+                               </div>
                                
                                
-                                <h2 className="hidden sm:block font-hero ml-40 text-yellow-light text-shadow text-6xl   leading-[80px] md:leading-[80px] text-center md:text-left  border-4 border-double border-indigo-600 bg-indigo-100 ">Game:</h2> 
-                                <h2 className="sm:hidden font-hero ml-40 text-yellow-light text-shadow text-4xl   leading-[40px] md:leading-[80px] text-center md:text-left  border-4 border-double border-indigo-600 bg-indigo-100 ">Game:</h2> 
     
                                 </section>
     
@@ -569,10 +588,10 @@ export class Home extends Component {
                             
                             <div class='max-w-4xl mx-auto '>
                             
-                            <section id='left' class='flex flex-col-reverse justify-center sm:flex-row p-6 items-center gap-8 mb-12 scroll-mt-40 widescreen:section-min-height tallscreen:section-min-height'>
+                            <section id='left' class=' flex flex-col-reverse justify-center sm:flex-row p-6 items-center gap-8 mb-12 scroll-mt-40'>
                                     
                                 
-                            <div className='text-white sticky'>
+                            <div className=' text-white sticky'>
                                     <div className='thirdpageplayingwords '>
                                     <h2 class="text-gray-600 text-2xl font-extrabold md:text-3xl lg:text-4xl">
      Your Writing Input: <span class="px-2 text-white bg-mybg rounded">{this.state.result1}</span>
@@ -615,21 +634,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov1} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov1} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov1} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy1:true})
                 setTimeout(() => {this.setState({
                 copy1:false})},2000)
-                navigator.clipboard.writeText(this.state.cov1)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov1)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy1 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy1 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy1:true})
+                setTimeout(() => {this.setState({
+                copy1:false})},2000)
+                navigator.clipboard.writeText(this.state.cov1)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy1 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy1 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -642,21 +682,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov2} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov2} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov2} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy2:true})
                 setTimeout(() => {this.setState({
                 copy2:false})},2000)
-                navigator.clipboard.writeText(this.state.cov2)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov2)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy2 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy2 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy2:true})
+                setTimeout(() => {this.setState({
+                copy2:false})},2000)
+                navigator.clipboard.writeText(this.state.cov2)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy2 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy2 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -665,24 +726,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov3} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov3} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov3} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy3:true})
                 setTimeout(() => {this.setState({
                 copy3:false})},2000)
-                navigator.clipboard.writeText(this.state.cov3)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov3)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy3 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy3 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy3:true})
+                setTimeout(() => {this.setState({
+                copy3:false})},2000)
+                navigator.clipboard.writeText(this.state.cov3)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy3 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy3 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -691,24 +774,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov4} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov4} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov4} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy4:true})
                 setTimeout(() => {this.setState({
                 copy4:false})},2000)
-                navigator.clipboard.writeText(this.state.cov4)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov4)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy4 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy4 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy4:true})
+                setTimeout(() => {this.setState({
+                copy4:false})},2000)
+                navigator.clipboard.writeText(this.state.cov4)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy4 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy4 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -717,24 +822,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov5} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov5} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov5} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy5:true})
                 setTimeout(() => {this.setState({
                 copy5:false})},2000)
-                navigator.clipboard.writeText(this.state.cov5)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov5)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy5 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy5 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy5:true})
+                setTimeout(() => {this.setState({
+                copy5:false})},2000)
+                navigator.clipboard.writeText(this.state.cov5)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy5 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy5 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -743,24 +870,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov6} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov6} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov6} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy6:true})
                 setTimeout(() => {this.setState({
                 copy6:false})},2000)
-                navigator.clipboard.writeText(this.state.cov6)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov6)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy6 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy6 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy6:true})
+                setTimeout(() => {this.setState({
+                copy6:false})},2000)
+                navigator.clipboard.writeText(this.state.cov6)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy6 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy6 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -769,24 +918,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov7} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov7} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov7} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy7:true})
                 setTimeout(() => {this.setState({
                 copy7:false})},2000)
-                navigator.clipboard.writeText(this.state.cov7)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov7)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy7 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy7 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy7:true})
+                setTimeout(() => {this.setState({
+                copy7:false})},2000)
+                navigator.clipboard.writeText(this.state.cov7)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy7 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy7 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -795,24 +966,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov8} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov8} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov8} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy8:true})
                 setTimeout(() => {this.setState({
                 copy8:false})},2000)
-                navigator.clipboard.writeText(this.state.cov8)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov8)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy8 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy8 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy8:true})
+                setTimeout(() => {this.setState({
+                copy8:false})},2000)
+                navigator.clipboard.writeText(this.state.cov8)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy8 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy8 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -821,24 +1014,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov9} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov9} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov9} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy9:true})
                 setTimeout(() => {this.setState({
                 copy9:false})},2000)
-                navigator.clipboard.writeText(this.state.cov9)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov9)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy9 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy9 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy9:true})
+                setTimeout(() => {this.setState({
+                copy9:false})},2000)
+                navigator.clipboard.writeText(this.state.cov9)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy9 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy9 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -847,24 +1062,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov10} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov10} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov10} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy10:true})
                 setTimeout(() => {this.setState({
                 copy10:false})},2000)
-                navigator.clipboard.writeText(this.state.cov10)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov10)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy10 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy10 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy10:true})
+                setTimeout(() => {this.setState({
+                copy10:false})},2000)
+                navigator.clipboard.writeText(this.state.cov10)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy10 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy10 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -873,24 +1110,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov11} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov11} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov11} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy11:true})
                 setTimeout(() => {this.setState({
                 copy11:false})},2000)
-                navigator.clipboard.writeText(this.state.cov11)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov11)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy11 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy11 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy11:true})
+                setTimeout(() => {this.setState({
+                copy11:false})},2000)
+                navigator.clipboard.writeText(this.state.cov11)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy11 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy11 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -899,24 +1158,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov12} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov12} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov12} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy12:true})
                 setTimeout(() => {this.setState({
                 copy12:false})},2000)
-                navigator.clipboard.writeText(this.state.cov12)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov12)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy12 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy12 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy12:true})
+                setTimeout(() => {this.setState({
+                copy12:false})},2000)
+                navigator.clipboard.writeText(this.state.cov12)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy12 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy12 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -925,24 +1206,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov13} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov13} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov13} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy13:true})
                 setTimeout(() => {this.setState({
                 copy13:false})},2000)
-                navigator.clipboard.writeText(this.state.cov13)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov13)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy13 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy13 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy13:true})
+                setTimeout(() => {this.setState({
+                copy13:false})},2000)
+                navigator.clipboard.writeText(this.state.cov13)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy13 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy13 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -951,24 +1254,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov14} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov14} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov14} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy14:true})
                 setTimeout(() => {this.setState({
                 copy14:false})},2000)
-                navigator.clipboard.writeText(this.state.cov14)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov14)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy14 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy14 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy14:true})
+                setTimeout(() => {this.setState({
+                copy14:false})},2000)
+                navigator.clipboard.writeText(this.state.cov14)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy14 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy14 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -977,24 +1302,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov15} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov15} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov15} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy15:true})
                 setTimeout(() => {this.setState({
                 copy15:false})},2000)
-                navigator.clipboard.writeText(this.state.cov15)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov15)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy15 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy15 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy15:true})
+                setTimeout(() => {this.setState({
+                copy15:false})},2000)
+                navigator.clipboard.writeText(this.state.cov15)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy15 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy15 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1003,24 +1350,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov16} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov16} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov16} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy16:true})
                 setTimeout(() => {this.setState({
                 copy16:false})},2000)
-                navigator.clipboard.writeText(this.state.cov16)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov16)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy16 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy16 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy16:true})
+                setTimeout(() => {this.setState({
+                copy16:false})},2000)
+                navigator.clipboard.writeText(this.state.cov16)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy16 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy16 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1029,24 +1398,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov17} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov17} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov17} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy17:true})
                 setTimeout(() => {this.setState({
                 copy17:false})},2000)
-                navigator.clipboard.writeText(this.state.cov17)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov17)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy17 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy17 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy17:true})
+                setTimeout(() => {this.setState({
+                copy17:false})},2000)
+                navigator.clipboard.writeText(this.state.cov17)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy17 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy17 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1055,24 +1446,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov18} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov18} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov18} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy18:true})
                 setTimeout(() => {this.setState({
                 copy18:false})},2000)
-                navigator.clipboard.writeText(this.state.cov18)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov18)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy18 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy18 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy18:true})
+                setTimeout(() => {this.setState({
+                copy18:false})},2000)
+                navigator.clipboard.writeText(this.state.cov18)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy18 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy18 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1081,24 +1494,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov19} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov19} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov19} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy19:true})
                 setTimeout(() => {this.setState({
                 copy19:false})},2000)
-                navigator.clipboard.writeText(this.state.cov19)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov19)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy19 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy19 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy19:true})
+                setTimeout(() => {this.setState({
+                copy19:false})},2000)
+                navigator.clipboard.writeText(this.state.cov19)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy19 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy19 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1107,24 +1542,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov20} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov20} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov20} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy20:true})
                 setTimeout(() => {this.setState({
-                copy20:false})},2000) 
-                navigator.clipboard.writeText(this.state.cov20)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                copy20:false})},2000)
+                navigator.clipboard.writeText(this.state.cov20)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy20 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy20 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy20:true})
+                setTimeout(() => {this.setState({
+                copy20:false})},2000)
+                navigator.clipboard.writeText(this.state.cov20)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy20 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy20 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1133,24 +1590,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+    
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov21} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov21} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov21} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy21:true})
                 setTimeout(() => {this.setState({
                 copy21:false})},2000)
-                navigator.clipboard.writeText(this.state.cov21)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov21)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy21 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy21 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy21:true})
+                setTimeout(() => {this.setState({
+                copy21:false})},2000)
+                navigator.clipboard.writeText(this.state.cov21)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy21 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy21 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1162,21 +1641,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov22} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov22} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov22} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy22:true})
                 setTimeout(() => {this.setState({
                 copy22:false})},2000)
-                navigator.clipboard.writeText(this.state.cov22)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov22)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy22 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy22 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy22:true})
+                setTimeout(() => {this.setState({
+                copy22:false})},2000)
+                navigator.clipboard.writeText(this.state.cov22)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy22 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy22 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1188,21 +1688,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov23} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov23} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov23} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy23:true})
                 setTimeout(() => {this.setState({
                 copy23:false})},2000)
-                navigator.clipboard.writeText(this.state.cov23)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov23)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy23 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy23 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy23:true})
+                setTimeout(() => {this.setState({
+                copy23:false})},2000)
+                navigator.clipboard.writeText(this.state.cov23)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy23 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy23 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1214,21 +1735,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov24} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov24} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov24} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy24:true})
                 setTimeout(() => {this.setState({
                 copy24:false})},2000)
-                navigator.clipboard.writeText(this.state.cov24)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov24)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy24 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy24 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy24:true})
+                setTimeout(() => {this.setState({
+                copy24:false})},2000)
+                navigator.clipboard.writeText(this.state.cov24)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy24 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy24 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1240,21 +1782,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov25} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov25} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov25} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy25:true})
                 setTimeout(() => {this.setState({
                 copy25:false})},2000)
-                navigator.clipboard.writeText(this.state.cov25)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov25)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy25 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy25 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy25:true})
+                setTimeout(() => {this.setState({
+                copy25:false})},2000)
+                navigator.clipboard.writeText(this.state.cov25)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy25 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy25 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1266,21 +1829,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov26} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov26} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov26} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy26:true})
                 setTimeout(() => {this.setState({
                 copy26:false})},2000)
-                navigator.clipboard.writeText(this.state.cov26)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov26)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy26 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy26 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy26:true})
+                setTimeout(() => {this.setState({
+                copy26:false})},2000)
+                navigator.clipboard.writeText(this.state.cov26)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy26 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy26 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1292,21 +1876,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov27} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov27} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov27} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy27:true})
                 setTimeout(() => {this.setState({
                 copy27:false})},2000)
-                navigator.clipboard.writeText(this.state.cov27)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov27)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy27 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy27 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy27:true})
+                setTimeout(() => {this.setState({
+                copy27:false})},2000)
+                navigator.clipboard.writeText(this.state.cov27)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy27 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy27 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1318,21 +1923,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov28} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov28} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov28} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy28:true})
                 setTimeout(() => {this.setState({
                 copy28:false})},2000)
-                navigator.clipboard.writeText(this.state.cov28)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
-            {!this.state.copy28 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                navigator.clipboard.writeText(this.state.cov28)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy1 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy28 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy28:true})
+                setTimeout(() => {this.setState({
+                copy28:false})},2000)
+                navigator.clipboard.writeText(this.state.cov28)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy28 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy28 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1344,21 +1970,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov29} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov29} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov29} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy29:true})
                 setTimeout(() => {this.setState({
                 copy29:false})},2000)
-                navigator.clipboard.writeText(this.state.cov29)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov29)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy29 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy29 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy29:true})
+                setTimeout(() => {this.setState({
+                copy29:false})},2000)
+                navigator.clipboard.writeText(this.state.cov29)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy29 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy29 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1370,21 +2017,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov30} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov30} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov30} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy30:true})
                 setTimeout(() => {this.setState({
                 copy30:false})},2000)
-                navigator.clipboard.writeText(this.state.cov30)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
-            {!this.state.copy30 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                navigator.clipboard.writeText(this.state.cov30)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy1 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy30 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy30:true})
+                setTimeout(() => {this.setState({
+                copy30:false})},2000)
+                navigator.clipboard.writeText(this.state.cov30)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy30 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy30 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1396,21 +2064,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov31} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov31} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov31} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy31:true})
                 setTimeout(() => {this.setState({
                 copy31:false})},2000)
-                navigator.clipboard.writeText(this.state.cov31)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov31)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy31 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy31 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy31:true})
+                setTimeout(() => {this.setState({
+                copy31:false})},2000)
+                navigator.clipboard.writeText(this.state.cov31)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy31 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy31 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1422,21 +2111,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov32} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov32} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov32} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy32:true})
                 setTimeout(() => {this.setState({
                 copy32:false})},2000)
-                navigator.clipboard.writeText(this.state.cov32)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov32)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy32 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy32 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy32:true})
+                setTimeout(() => {this.setState({
+                copy32:false})},2000)
+                navigator.clipboard.writeText(this.state.cov32)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy32 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy32 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1448,21 +2158,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov33} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov33} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov33} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy33:true})
                 setTimeout(() => {this.setState({
                 copy33:false})},2000)
-                navigator.clipboard.writeText(this.state.cov33)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov33)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy33 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy33 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy33:true})
+                setTimeout(() => {this.setState({
+                copy33:false})},2000)
+                navigator.clipboard.writeText(this.state.cov33)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy33 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy33 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1474,21 +2205,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov34} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov34} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov34} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy34:true})
                 setTimeout(() => {this.setState({
                 copy34:false})},2000)
-                navigator.clipboard.writeText(this.state.cov34)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov34)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy34 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy34 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy34:true})
+                setTimeout(() => {this.setState({
+                copy34:false})},2000)
+                navigator.clipboard.writeText(this.state.cov34)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy34 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy34 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1500,21 +2252,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov35} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov35} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov35} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy35:true})
                 setTimeout(() => {this.setState({
                 copy35:false})},2000)
-                navigator.clipboard.writeText(this.state.cov35)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov35)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy35 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy35 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy35:true})
+                setTimeout(() => {this.setState({
+                copy35:false})},2000)
+                navigator.clipboard.writeText(this.state.cov35)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy35 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy35 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1526,21 +2299,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov36} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov36} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov36} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy36:true})
                 setTimeout(() => {this.setState({
                 copy36:false})},2000)
-                navigator.clipboard.writeText(this.state.cov36)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov36)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy36 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy36 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy36:true})
+                setTimeout(() => {this.setState({
+                copy36:false})},2000)
+                navigator.clipboard.writeText(this.state.cov36)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy36 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy36 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1552,21 +2346,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov37} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov37} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov37} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy37:true})
                 setTimeout(() => {this.setState({
                 copy37:false})},2000)
-                navigator.clipboard.writeText(this.state.cov37)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov37)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy37 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy37 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy37:true})
+                setTimeout(() => {this.setState({
+                copy37:false})},2000)
+                navigator.clipboard.writeText(this.state.cov37)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy37 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy37 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1578,21 +2393,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov38} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov38} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov38} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy38:true})
                 setTimeout(() => {this.setState({
                 copy38:false})},2000)
-                navigator.clipboard.writeText(this.state.cov38)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov38)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy38 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy38 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy38:true})
+                setTimeout(() => {this.setState({
+                copy38:false})},2000)
+                navigator.clipboard.writeText(this.state.cov38)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy38 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy38 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1604,21 +2440,42 @@ export class Home extends Component {
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov39} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov39} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov39} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy39:true})
                 setTimeout(() => {this.setState({
                 copy39:false})},2000)
-                navigator.clipboard.writeText(this.state.cov39)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov39)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy39 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy39 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy39:true})
+                setTimeout(() => {this.setState({
+                copy39:false})},2000)
+                navigator.clipboard.writeText(this.state.cov39)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy39 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy39 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1627,24 +2484,46 @@ export class Home extends Component {
             </button>
         </div>
     </div>
+   
     <div class="w-full max-w-[16rem]">
         <div class="relative">
             <label for="npm-install-copy-text" class="sr-only">Label</label>
-            <input id="npm-install-copy-text" type="text" class="col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={this.state.cov40} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="hidden sm:block bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder={this.state.cov40} disabled readonly/>
+            <input id="npm-install-copy-text" type="text" class="sm:hidden bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full px-2.5 py-3 md:py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:-top-3 placeholder:text-center placeholder:relative " placeholder={this.state.cov40} disabled readonly/>
             <button onClick={()=>{
                 this.setState({copy40:true})
                 setTimeout(() => {this.setState({
                 copy40:false})},2000)
-                navigator.clipboard.writeText(this.state.cov40)}} class="absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 inline-flex items-center justify-center bg-white border-gray-200 border">
+                navigator.clipboard.writeText(this.state.cov40)}} class="sm:hidden relative bottom-2 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5 sm:py-1 sm:w-2 sm:h-2 sm:px-1 sm:ml-1 inline-flex items-center justify-center bg-white border-gray-200 border">
             {!this.state.copy40 && <span id="default-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
                     </svg>
                     <span class="text-xs font-semibold">Copy</span>
                 </span>}
                 
                 {this.state.copy40 && <span id="success-message" class="inline-flex items-center">
-                    <svg class="w-3 h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
+                </span>}
+                
+            </button>
+            <button onClick={()=>{
+                this.setState({copy40:true})
+                setTimeout(() => {this.setState({
+                copy40:false})},2000)
+                navigator.clipboard.writeText(this.state.cov40)}} class="hidden sm:inline-flex absolute end-2.5 top-1/2 -translate-y-1/2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg py-2 px-2.5  items-center justify-center bg-white border-gray-200 border">
+            {!this.state.copy40 && <span id="default-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 me-1.2 md:me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                    </svg>
+                    <span class="text-xs font-semibold">Copy</span>
+                </span>}
+                
+                {this.state.copy40 && <span id="success-message" class="inline-flex items-center">
+                    <svg class="w-2 h-2 md:w-3 md:h-3 text-blue-700 dark:text-blue-500 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                     </svg>
                     <span class="text-xs font-semibold text-blue-700 dark:text-blue-500">Copied</span>   
@@ -1653,10 +2532,7 @@ export class Home extends Component {
             </button>
         </div>
     </div>
-    
     </div>
-      
-    
     </div>
                                 </section>
                            </div>
@@ -1722,7 +2598,7 @@ export class Home extends Component {
                             
                             <div class='max-w-4xl mx-auto '>
                             
-                            <section id='left' class='flex flex-col-reverse justify-center sm:flex-row p-6 items-center gap-8 mb-12 scroll-mt-40 widescreen:section-min-height tallscreen:section-min-height'>
+                            <section id='left' class='flex flex-col-reverse justify-center sm:flex-row p-6 items-center gap-8 mb-12 scroll-mt-40 '>
                                     
                                 
                             <div className='text-white'>
