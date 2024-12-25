@@ -225,6 +225,7 @@ export class Home extends Component {
                 }
                 
             }
+            
        
             const handleChange=(e)=>{
                this.setState({inputValue:e.target.value});
@@ -2684,8 +2685,22 @@ export class Home extends Component {
                     <dd class="text-gray-500 dark:text-gray-400">Incorrect Points</dd>
                 </div>
                 <div class="flex flex-col items-center justify-center">
-                    <dt class="mb-2 text-3xl font-extrabold">{Number((this.state.ipoints * 100) / (this.state.ipoints + this.state.dpoints)).toPrecision(4)}</dt>
-                    <dd class="text-gray-500 dark:text-gray-400">Accuracy</dd>
+                    {
+                        this.state.dpoints == 0 && 
+                        <>
+                        <dt class="mb-2 text-3xl font-extrabold">100%</dt>
+                        <dd class="text-gray-500 dark:text-gray-400">Accuracy</dd>
+                        </>
+                    }
+                    {
+                        this.state.dpoints != 0 && 
+                        <> 
+                        <dt class="mb-2 text-3xl font-extrabold">{Number((this.state.ipoints * 100) / (this.state.ipoints + this.state.dpoints)).toPrecision(4)}%</dt>
+                        <dd class="text-gray-500 dark:text-gray-400">Accuracy</dd>
+                        </>
+
+                    }
+                   
                 </div>
               
              
